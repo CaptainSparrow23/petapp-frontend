@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MainAuth from './(auth)/main';
 import SignIn from './(auth)/signin';
 import SignUp from './(auth)/signup';
 import Home from './(tabs)/index';
@@ -30,6 +31,15 @@ function TabNavigator() {
 function AuthNavigator({ onSignIn }: { onSignIn: () => void }) {
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Main">
+        {(props) => (
+          <MainAuth
+            {...props}
+            onNavigateToSignIn={() => props.navigation.navigate('SignIn')}
+            onNavigateToSignUp={() => props.navigation.navigate('SignUp')}
+          />
+        )}
+      </Stack.Screen>
       <Stack.Screen name="SignIn">
         {(props) => (
           <SignIn
